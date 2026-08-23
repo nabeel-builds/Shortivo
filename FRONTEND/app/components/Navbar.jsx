@@ -2,84 +2,254 @@
 
 import Link from "next/link";
 import React, { useState } from "react";
+import { useTheme } from "./ThemeProvider";
 
 const Navbar = () => {
+  const { darkMode, toggleTheme } = useTheme();
   const [menuOpen, setMenuOpen] = useState(false);
 
-  return (
-    <nav className="h-16 bg-purple-700 flex justify-between px-4 items-center text-white relative">
-      
-      {/* Logo */}
-      <Link href="/">
-        <button className="logo font-bold text-2xl cursor-pointer">
-          Shortivo
-        </button>
-      </Link>
+  const closeMenu = () => {
+    setMenuOpen(false);
+  };
 
-      {/* Desktop Menu */}
-      <ul className="hidden md:flex justify-center items-center gap-4">
-        <Link href="/"><li className="hover:text-purple-200 transition">Home</li></Link>
-        <Link href="/about"><li className="hover:text-purple-200 transition">About</li></Link>
-        <Link href="/shorten"><li className="hover:text-purple-200 transition">Shorten</li></Link>
-        <Link href="/contact"><li className="hover:text-purple-200 transition">Contact Me</li></Link>
-        <li className="flex gap-3">
+  return (
+    <nav
+      className={`relative z-50 border-b px-4 py-3 text-white transition-colors duration-300 sm:px-7 ${darkMode
+          ? "border-[#062d4c] bg-linear-to-b from-[#075b96] via-[#043e6d] to-[#022b4c]"
+          : "border-[#0d4e86] bg-linear-to-b from-[#1686df] via-[#086bc0] to-[#07559d]"
+        }`}
+    >
+      {/* Navbar Main */}
+      <div className="flex items-center justify-between gap-4">
+
+        {/* Logo */}
+        <Link
+          href="/"
+          onClick={closeMenu}
+          className="flex items-center gap-2 text-xl font-bold sm:text-2xl"
+        >
+          <img
+            width={40}
+            height={40}
+            src="/ShortivoLogo.png"
+            alt="Shortivo"
+            className="h-10 w-10 object-contain"
+          />
+
+          <span>Shortivo</span>
+        </Link>
+
+        {/* Desktop Navigation */}
+        <div className="hidden items-center gap-1 md:flex">
+
+          <Link
+            href="/"
+            className="rounded-md px-4 py-2 text-sm font-medium transition hover:bg-white/15"
+          >
+            Home
+          </Link>
+
+          <Link
+            href="/about"
+            className="rounded-md px-4 py-2 text-sm font-medium transition hover:bg-white/15"
+          >
+            About
+          </Link>
+
+          <Link
+            href="/shorten"
+            className="rounded-md px-4 py-2 text-sm font-medium transition hover:bg-white/15"
+          >
+            Shorten
+          </Link>
+
+          <Link
+            href="/contact"
+            className="rounded-md px-4 py-2 text-sm font-medium transition hover:bg-white/15"
+          >
+            Contact Me
+          </Link>
+        </div>
+
+        <div className="hidden items-center gap-2 sm:flex">
+
           <Link href="/shorten">
-            <button className="cursor-pointer bg-purple-500 shadow-lg p-3 rounded-lg font-bold py-1 hover:bg-purple-400 transition">
+            <button
+              className={`cursor-pointer rounded-md border px-4 py-2 text-sm font-bold shadow-md transition ${darkMode
+                  ? "border-[#51738d] bg-linear-to-b from-[#e1edf4] to-[#aebfca] text-[#12283a] hover:from-white hover:to-[#c4d5df]"
+                  : "border-[#b6cddd] bg-linear-to-b from-white to-[#d9e6ef] text-[#17304b] hover:from-white hover:to-[#c9dce9]"
+                }`}
+            >
               Try Now
             </button>
           </Link>
-          <Link target="_blank" href="https://github.com/nabeel-builds">
-            <button className="cursor-pointer bg-purple-500 shadow-lg p-3 rounded-lg font-bold py-1 hover:bg-purple-400 transition">
+
+          <Link
+            href="https://github.com/nabeel-builds"
+            target="_blank"
+          >
+            <button
+              className={`cursor-pointer rounded-md border px-4 py-2 text-sm font-bold shadow-md transition ${darkMode
+                  ? "border-[#51738d] bg-linear-to-b from-[#e1edf4] to-[#aebfca] text-[#12283a] hover:from-white hover:to-[#c4d5df]"
+                  : "border-[#b6cddd] bg-linear-to-b from-white to-[#d9e6ef] text-[#17304b] hover:from-white hover:to-[#c9dce9]"
+                }`}
+            >
               GitHub
             </button>
           </Link>
-        </li>
-      </ul>
 
-      {/* Hamburger Button (mobile only) */}
-      <button
-        className="md:hidden flex flex-col gap-[5px] cursor-pointer z-50"
-        onClick={() => setMenuOpen(!menuOpen)}
-        aria-label="Toggle menu"
-      >
-        <span
-          className={`block w-6 h-[2px] bg-white rounded transition-all duration-300 ${
-            menuOpen ? "rotate-45 translate-y-[7px]" : ""
-          }`}
-        />
-        <span
-          className={`block w-6 h-[2px] bg-white rounded transition-all duration-300 ${
-            menuOpen ? "opacity-0" : ""
-          }`}
-        />
-        <span
-          className={`block w-6 h-[2px] bg-white rounded transition-all duration-300 ${
-            menuOpen ? "-rotate-45 -translate-y-[7px]" : ""
-          }`}
-        />
-      </button>
+          <button
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+            className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-md border border-white/30 bg-white/10 transition hover:bg-white/20"
+          >
+            {darkMode ? (
+              <img
+                src="/sun.png"
+                alt="Light Mode"
+                className="h-5 w-5 object-contain"
+              />
+            ) : (
+              <img
+                src="/moon.png"
+                alt="Dark Mode"
+                className="h-5 w-5 object-contain"
+              />
+            )}
+          </button>
+        </div>
 
-      {/* Mobile Dropdown Menu */}
-      <div
-        className={`md:hidden absolute top-16 left-0 w-full bg-purple-700 px-4 pb-4 flex flex-col gap-3 transition-all duration-300 z-40 ${
-          menuOpen ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-2 pointer-events-none"
-        }`}
-      >
-        <Link href="/" onClick={() => setMenuOpen(false)}>
-          <div className="py-2 border-b border-purple-500 hover:text-purple-200 transition">Home</div>
-        </Link>
-        <Link href="/about" onClick={() => setMenuOpen(false)}>
-          <div className="py-2 border-b border-purple-500 hover:text-purple-200 transition">About</div>
-        </Link>
-        <Link href="/shorten" onClick={() => setMenuOpen(false)}>
-          <div className="py-2 border-b border-purple-500 hover:text-purple-200 transition">Shorten</div>
-        </Link>
-        <Link href="/contact" onClick={() => setMenuOpen(false)}>
-          <div className="py-2 border-b border-purple-500 hover:text-purple-200 transition">Contact Me</div>
-        </Link>
-       
+        <div className="flex items-center gap-2 md:hidden">
+
+          <button
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+            className="flex h-9 w-10 cursor-pointer items-center justify-center rounded-md border border-white/30 bg-white/10 transition hover:bg-white/20"
+          >
+            {darkMode ? (
+              <img
+                src="/sun.png"
+                alt="Light Mode"
+                className="h-5 w-5 object-contain"
+              />
+            ) : (
+              <img
+                src="/moon.png"
+                alt="Dark Mode"
+                className="h-5 w-5 object-contain"
+              />
+            )}
+          </button>
+
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle menu"
+            aria-expanded={menuOpen}
+            className="flex h-9 w-10 cursor-pointer flex-col items-center justify-center gap-[5px] rounded-md border border-white/30 bg-white/10 transition hover:bg-white/20"
+          >
+
+            <span
+              className={`block h-[2px] w-6 rounded bg-white transition-all duration-300 ${menuOpen
+                  ? "translate-y-[7px] rotate-45"
+                  : ""
+                }`}
+            />
+
+            <span
+              className={`block h-[2px] w-6 rounded bg-white transition-all duration-300 ${menuOpen ? "opacity-0" : "opacity-100"
+                }`}
+            />
+
+
+            <span
+              className={`block h-[2px] w-6 rounded bg-white transition-all duration-300 ${menuOpen
+                  ? "-translate-y-[7px] -rotate-45"
+                  : ""
+                }`}
+            />
+          </button>
+        </div>
       </div>
 
+      <div
+        className={`absolute left-0 top-full w-full overflow-hidden border-b transition-all duration-300 md:hidden ${darkMode
+            ? "border-[#062d4c] bg-linear-to-b from-[#075b96] to-[#022b4c]"
+            : "border-[#0d4e86] bg-linear-to-b from-[#1686df] to-[#07559d]"
+          } ${menuOpen
+            ? "max-h-[500px] opacity-100"
+            : "pointer-events-none max-h-0 opacity-0"
+          }`}
+      >
+        <div className="flex flex-col px-4 pb-5 pt-3">
+
+          <Link
+            href="/"
+            onClick={closeMenu}
+            className="border-b border-white/20 py-3 text-sm font-medium transition hover:bg-white/10 hover:pl-2"
+          >
+            Home
+          </Link>
+
+          <Link
+            href="/about"
+            onClick={closeMenu}
+            className="border-b border-white/20 py-3 text-sm font-medium transition hover:bg-white/10 hover:pl-2"
+          >
+            About
+          </Link>
+
+          <Link
+            href="/shorten"
+            onClick={closeMenu}
+            className="border-b border-white/20 py-3 text-sm font-medium transition hover:bg-white/10 hover:pl-2"
+          >
+            Shorten
+          </Link>
+
+          <Link
+            href="/contact"
+            onClick={closeMenu}
+            className="border-b border-white/20 py-3 text-sm font-medium transition hover:bg-white/10 hover:pl-2"
+          >
+            Contact Me
+          </Link>
+
+          <div className="mt-4 flex gap-2">
+
+            <Link
+              href="/shorten"
+              onClick={closeMenu}
+              className="flex-1"
+            >
+              <button
+                className={`w-full cursor-pointer rounded-md border px-4 py-2 text-sm font-bold shadow-md transition ${darkMode
+                    ? "border-[#51738d] bg-linear-to-b from-[#e1edf4] to-[#aebfca] text-[#12283a] hover:from-white hover:to-[#c4d5df]"
+                    : "border-[#b6cddd] bg-linear-to-b from-white to-[#d9e6ef] text-[#17304b] hover:from-white hover:to-[#c9dce9]"
+                  }`}
+              >
+                Try Now
+              </button>
+            </Link>
+
+            <Link
+              href="https://github.com/nabeel-builds"
+              target="_blank"
+              onClick={closeMenu}
+              className="flex-1"
+            >
+              <button
+                className={`w-full cursor-pointer rounded-md border px-4 py-2 text-sm font-bold shadow-md transition ${darkMode
+                    ? "border-[#51738d] bg-linear-to-b from-[#e1edf4] to-[#aebfca] text-[#12283a] hover:from-white hover:to-[#c4d5df]"
+                    : "border-[#b6cddd] bg-linear-to-b from-white to-[#d9e6ef] text-[#17304b] hover:from-white hover:to-[#c9dce9]"
+                  }`}
+              >
+                GitHub
+              </button>
+            </Link>
+
+          </div>
+        </div>
+      </div>
     </nav>
   );
 };
