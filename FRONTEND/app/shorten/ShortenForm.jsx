@@ -4,13 +4,17 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { toast } from "react-toastify";
 
-const ShortenForm = ({ initialUrl = "" }) => {
-
-  const [url, setUrl] = useState(initialUrl);
+const ShortenForm = () => {
+  const [url, setUrl] = useState("");
   const [shorturl, setShorturl] = useState("");
   const [generated, setGenerated] = useState("");
 
   const generateUrl = async () => {
+    if (!url) {
+      toast.error("Please enter a URL");
+      return;
+    }
+
     try {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/api/url/shorten`,
@@ -67,6 +71,7 @@ const ShortenForm = ({ initialUrl = "" }) => {
 
         <div className="flex flex-col gap-3">
 
+          {/* Original URL */}
           <input
             type="text"
             placeholder="Enter your URL"
@@ -82,6 +87,7 @@ const ShortenForm = ({ initialUrl = "" }) => {
             "
           />
 
+          {/* Custom Short URL */}
           <input
             type="text"
             placeholder="Enter your preferred short URL text"
@@ -97,6 +103,7 @@ const ShortenForm = ({ initialUrl = "" }) => {
             "
           />
 
+          {/* Generate Button */}
           <button
             onClick={generateUrl}
             className="
@@ -121,6 +128,7 @@ const ShortenForm = ({ initialUrl = "" }) => {
 
         </div>
 
+        {/* Generated URL */}
         {generated && (
           <div className="mt-2">
 
