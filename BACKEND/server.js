@@ -15,7 +15,7 @@ const app = express();
 connectDB();
 
 const allowOrigins = [
-  "https://shortivo.vercel.app",
+  "https://shortivo-in.vercel.app",
   "http://localhost:3000",
 ]
 
