@@ -1,6 +1,6 @@
-# 🔗 Shortify
+# 🔗 Shortivo
 
-**Shortify** is a simple, fast, and modern URL shortener built with **Next.js, React, and Tailwind CSS**.
+**Shortivo** is a simple, fast, and modern URL shortener built with **Next.js, React, and Tailwind CSS**.
 
 It allows users to convert long and complicated URLs into short, easy-to-share links.
 
@@ -28,7 +28,7 @@ It allows users to convert long and complicated URLs into short, easy-to-share l
 ## 📸 Preview
 
 <p align="center">
-  <img src="./public/Screenshot.png" alt="Shortify Home Page" width="800"/>
+  <img src="./public/Screenshot.png" alt="Shortivo Home Page" width="800"/>
 </p>
 
 ```text
@@ -37,18 +37,18 @@ Coming Soon...
 
 ## 🚀 Getting Started
 
-Follow these steps to run Shortify locally.
+Follow these steps to run Shortivo locally.
 
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/nabeel-builds/shortify.git
+git clone https://github.com/nabeel-builds/Shortivo.git
 ```
 
 ### 2. Navigate to the project
 
 ```bash
-cd shortify
+cd Shortivo
 ```
 
 ### 3. Install dependencies
@@ -74,7 +74,7 @@ http://localhost:3000
 1. Enter your long URL.
 2. Give custom name for you URL.
 3. Click the **Shorten URL** button.
-4. Shortify generates a short URL.
+4. Shortivo generates a short URL.
 5. Copy the generated URL.
 6. Share it anywhere you want.
 
@@ -110,6 +110,6 @@ This project is open-source and available under the **MIT License**.
 
 ### ⭐ Support
 
-If you like **Shortify**, consider giving the repository a ⭐ on GitHub.
+If you like **Shortivo**, consider giving the repository a ⭐ on GitHub.
 
 **Made with ❤️ using Next.js, React & Tailwind CSS**
