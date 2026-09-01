@@ -1,7 +1,7 @@
 const Url = require("../models/url.model");
 const crypto = require("crypto");
 
-const createShortUrl = async (req, res) => {
+const createShortUrlController = async (req, res) => {
   try {
     const { url, shorturl } = req.body;
 
@@ -11,9 +11,7 @@ const createShortUrl = async (req, res) => {
       });
     }
 
-    const code =
-      shorturl ||
-      crypto.randomBytes(4).toString("hex");
+    const code = shorturl || crypto.randomBytes(4).toString("hex");
 
     const existingUrl = await Url.findOne({
       shorturl: code,
@@ -46,5 +44,5 @@ const createShortUrl = async (req, res) => {
 };
 
 module.exports = {
-  createShortUrl,
+  createShortUrlController,
 };

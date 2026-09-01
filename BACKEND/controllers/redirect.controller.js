@@ -1,6 +1,6 @@
 const Url = require("../models/url.model");
 
-const redirectShortUrl = async (req, res) => {
+const redirectShortUrlController = async (req, res) => {
     try {
         const shorturl = req.params.shorturl;
 
@@ -11,10 +11,7 @@ const redirectShortUrl = async (req, res) => {
         if (doc) {
             let url = doc.url;
 
-            if (
-                !url.startsWith("http://") &&
-                !url.startsWith("https://")
-            ) {
+            if ( !url.startsWith("http://") && !url.startsWith("https://") ) {
                 url = "https://" + url;
             }
 
@@ -31,5 +28,5 @@ const redirectShortUrl = async (req, res) => {
 };
 
 module.exports = {
-    redirectShortUrl
+    redirectShortUrlController
 };
